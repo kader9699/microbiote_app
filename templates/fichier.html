@@ -4,51 +4,27 @@
 {% endblock %}
 {% block content %}
 <section class="hero-area bg-1 text-center overly">
-	<!--div class="container">
+	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="advance-search">
 					<div class="container">
 						<div class="row justify-content-center">
 							<div class="col-lg-12 col-md-12 align-content-center">
-								<form   action="{{ url_for('index') }}"  method="POST">
-									<div class="form-row">
-										<div class="form-group col-xl-4 col-lg-3 col-md-6">
-											<select class="w-100 form-control mt-lg-1 mt-md-2" name='categorie' required>
-												<option value=''>Choisissez un type</option>
-													<option value="Tout">Tout</option>
-													<option value="Automobiles">Importe</option>
-													<option value="Smartphones">Exporte</option>
-
-												</select>
-											</div>
-											<div class="form-group col-lg-3 col-md-6">
-											<select id="pays" class="w-100 form-control mt-lg-1 mt-md-2" name = 'pays' required>
-												<option value=''>Choisissez un bacterie</option>
-												<option value="benin">Benin</option>
-												<option value="niger">Niger</option>
-									
-											</select>
-										</div>
-										<div class="form-group col-lg-3 col-md-6">
-											<select id="ville" class="w-100 form-control mt-lg-1 mt-md-2" name= 'ville' required>
-												<option value=''>Choisissez un regime</option>
-												<option value="Tout">Tout</option>
-												<option value="Cotonou">Cotonou</option>
-											</select>
-										</div>
-										<div class="form-group col-xl-2 col-lg-3 col-md-6 align-self-center">
-												<button type="submit" class="btn btn-danger active w-100">Rechercher</button>
-										</div>
+								<h2>Soumettre un fichier Excel ou CSV</h2>
+								<form action="/fichier" method="POST" enctype="multipart/form-data">
+									<div class="mb-3">
+										<!--label for="fileInput" class="form-label">Choisissez un fichier Excel ou CSV</label-->
+										<input type="file" class="form-control" id="fileInput" name="file" accept=".xls, .xlsx, .csv" required>
 									</div>
+									<button type="submit" class="btn btn-danger">Soumettre</button>
 								</form>
 							</div>
 						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div-->
-	<!-- Container End -->
+					</div>	
+			    </div>
+		    </div>
+	    </div>
+	</div>
 </section>
 {% endblock %}
