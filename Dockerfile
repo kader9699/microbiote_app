@@ -12,16 +12,11 @@ COPY templates/ ./templates/
 COPY static/ ./static/
 COPY Fichier/ ./Fichier/
 
-
 # Installer les dépendances
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Exposer le port sur lequel Flask s'exécute
+# Exposer le port Flask (par défaut 5000)
 EXPOSE 5000
 
-# Définir la variable d'environnement pour Flask
-ENV FLASK_APP=app.py
-ENV FLASK_RUN_HOST=0.0.0.0
-
-# Commande pour démarrer l'application Flask
-CMD ["flask", "run"]
+# Commande pour démarrer l'application avec Gunicorn
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "app:app"]
