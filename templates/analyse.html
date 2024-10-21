@@ -1,6 +1,6 @@
 {% extends "base.html"%}
 {% block title %}
-  Page phylum
+  Page analyse
 {% endblock %}
 {% block content %}
 <section class="hero-area bg-1 text-center overly">
@@ -11,36 +11,46 @@
 					<div class="container">
 						<div class="row justify-content-center">
 							<div class="col-lg-12 col-md-12 align-content-center">
+                                {% with messages = get_flashed_messages(with_categories=true) %}
+                                {% if messages %}
+                                    <div class="alert-container">
+                                        {% for category, message in messages %}
+                                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                {{ message }}
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                                {% endwith %}
 								<form   action="{{ url_for('analyse') }}"  method="POST">
 									<div class="form-row">
 										<div class="form-group col-xl-4 col-lg-2 col-md-3">
 											<select class="w-100 form-control mt-lg-1 mt-md-2" name='bacterie' required>
-												<option value=''>Choisissez une bacterie</option>
+                                                <option value="">Selectionner une bacterie</option>
 												<option value="Tout">Tout</option>
-												<option value="Streptococcus_intermedius_JTH08.xml">Streptococcus intermedius</option>
-												<option value="Streptococcus_lutetiensis_033.xml">Streptococcus lutetiensis</option>
-                                                <option value="Raoultella_planticola_ATCC_33531.xml">Raoultella planticola</option>
+                                                {% for bacterie in bacterie_labels %}
+												<option value="{{bacterie}}">{{bacterie}}</option>
+                                                {% endfor %}
+									
 											</select>
 										</div>
 										<div class="form-group col-lg-2 col-md-3">
 											<select id="phylum" class="w-100 form-control mt-lg-1 mt-md-2" name = 'phylum' required>
 												<option value=''>Phylum</option>
                                                 <option value="Tout">Tout</option>
-												<option value="Firmicutes">Firmicutes</option>
-												<option value="Spirochaetes">Spirochaetes</option>
-                                                <option value="Proteobacteria">Proteobacteria</option>
-                                                <option value="Betaproteobacteria">Betaproteobacteria</option>
-                                                <option value="Actinobacteria">Actinobacteria</option>
+												{% for phylum in phylum_labels %}
+												<option value="{{phylum}}">{{phylum}}</option>
+                                                {% endfor %}
 									
 											</select>    
 										</div>
 										<div class="form-group col-lg-2 col-md-3">
 											<select id="nutriment" class="w-100 form-control mt-lg-1 mt-md-2" name='nutriment' required>
-												<option value=''>Nutriment</option>
+												<option value=''>Nutriment</option> 
 												<option value="Tout">Tout</option>
-												<option value="EX_thm(e)_Imp">thm(e)</option>
-												<option value="EX_mg2(e)_Imp">mg2(e)</option>
-												<option value="EX_cys_L(e)_Imp">cys_L(e)</option>
+												{% for nutriment in nutriment_labels %}
+												<option value="{{nutriment}}">{{nutriment}}</option>
+                                                {% endfor %}
 											</select>
 										</div>
 										<div class="form-group col-lg-2 col-md-3">

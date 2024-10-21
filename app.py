@@ -57,9 +57,14 @@ def fichier():
 # Api pour gerer les types de nutrition 
 @app.route("/analyse", methods=["POST","GET"])
 def analyse():
+    #session.clear()
+    file_manager = FileManager(session['file_path'])
+    file_manager.load_data()
+    bacterie_labels,phylum_labels,nutriment_labels = file_manager.Get_Select_Name()
     if request.method == "POST":
-        file_manager = FileManager(session['file_path'])
-        file_manager.load_data()
+        if 'file_path' not in session:
+            flash('Veuillez d\'abord soumettre un fichier avant de faire une recherche.')
+            return redirect(url_for('analyse'))   
         phylum = request.form['phylum']  
         bacterie = request.form['bacterie']
         nutriment = request.form['nutriment']
@@ -68,8 +73,8 @@ def analyse():
         data = file_manager.Get_Data(bacterie,phylum,nutriment,type)
         # Convertir le DataFrame en une liste de dictionnaires
         data_dict = data.to_dict(orient='records')
-        return render_template("analyse.html",data = data_dict)
-    return render_template("analyse.html")
+        return render_template("analyse.html",data = data_dict,bacterie_labels=bacterie_labels,phylum_labels=phylum_labels,nutriment_labels=nutriment_labels)
+    return render_template("analyse.html",bacterie_labels=bacterie_labels,phylum_labels=phylum_labels,nutriment_labels=nutriment_labels)
     
     
 if __name__ == "__main__":

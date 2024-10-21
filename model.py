@@ -133,5 +133,14 @@ class FileManager:
             data = self.Extraction_data_Bacterie_Nutriment_Importe_Exporte(bacterie,nutriment,type) 
         elif phylum != 'Tout' and bacterie != 'Tout' and nutriment != 'Tout' and type != 'Tout':
             data = self.Extraction_data_Bacterie_Phylum_Nutriment_Importe_Exporte(bacterie,phylum,nutriment,type) 
-        return data  
+        return data 
+    
+    
+    def Get_Select_Name(self):
+        bacterie = self.data['Souche Name'].unique()
+        phylum = self.data['phylum'].unique()
+        nutriment = self.data['ImpExp'].str.extract(r'_(.*?)_')
+        return bacterie,phylum,nutriment[0].unique()
+                
+        
           
