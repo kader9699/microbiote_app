@@ -19,5 +19,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Exposer le port sur lequel Flask s'exécute
 EXPOSE 5000
 
-# Commande pour démarrer Flask
-CMD ["flask", "run", "app.py", "--server.port=5000", "--server.enableCORS=false"]
+# Définir la variable d'environnement pour Flask
+ENV FLASK_APP=app.py
+ENV FLASK_RUN_HOST=0.0.0.0
+
+# Commande pour démarrer l'application Flask
+CMD ["flask", "run"]
